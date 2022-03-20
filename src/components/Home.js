@@ -4,11 +4,9 @@ import Footer from "./Footer";
 import ImgCarousel from "./ImgCarousel";
 import KostList from "./KostList";
 import KostPopuler from "./KostPopuler";
-import Navbar from "./Navbar";
 function Home() {
   return (
     <Container>
-      <Navbar />
       <ImgCarousel />
       <KostList title="Kost Rekomendasi" />
       <KostList title="Harga Eksklusif" />

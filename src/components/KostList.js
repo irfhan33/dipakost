@@ -45,7 +45,7 @@ function KostList({ title }) {
       <Carousel ref={carouselRef} {...settings}>
         <KostItem
           image="https://cdn.rukita.co/rukita/fit/700x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_1_.jpg"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
+          detailAdress="Kost Apik UMS Melati Indah Tipe A Laweyan Surakarta 3L8F4A8C"
           highlightAdress="Kota Makassar"
           price="693.000"
         />
