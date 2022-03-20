@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "./Footer";
 import ImgCarousel from "./ImgCarousel";
 import KostList from "./KostList";
 import KostPopuler from "./KostPopuler";
@@ -10,8 +11,9 @@ function Home() {
       <Navbar />
       <ImgCarousel />
       <KostList title="Kost Rekomendasi" />
-      <KostList title="Kost di bawah Rp 2 juta" />
+      <KostList title="Harga Eksklusif" />
       <KostPopuler />
+      <Footer />
     </Container>
   );
 }

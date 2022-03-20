@@ -104,7 +104,7 @@ const Container = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 32px;
+  font-size: 24px;
   color: #00b1ac;
 `;
 
