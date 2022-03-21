@@ -8,27 +8,45 @@ import NetworkWifi2BarOutlinedIcon from "@mui/icons-material/NetworkWifi2BarOutl
 import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import HomeMaxOutlinedIcon from "@mui/icons-material/HomeMaxOutlined";
+import { SRLWrapper } from "simple-react-lightbox";
 function Detail() {
+  const options = {
+    buttons: {
+      backgroundColor: "rgba(30,30,36,0)",
+      iconColor: "rgba(255, 255, 255, 0.8)",
+      iconPadding: "10px",
+      showAutoplayButton: false,
+      showCloseButton: false,
+      showDownloadButton: false,
+      showFullscreenButton: false,
+      showNextButton: true,
+      showPrevButton: true,
+      showThumbnailsButton: false,
+      size: "60px",
+    },
+  };
   return (
     <Container>
-      <Gallery>
-        <Left>
-          <img
-            src="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_12.jpg"
-            alt=""
-          />
-        </Left>
-        <Right>
-          <img
-            src="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_20.jpg"
-            alt=""
-          />
-          <img
-            src="https://ksassets.timeincuk.net/wp/uploads/sites/56/2021/01/Small-bedroom-Ideal-Home.jpg"
-            alt=""
-          />
-        </Right>
-      </Gallery>
+      <SRLWrapper options={options}>
+        <Gallery>
+          <Left>
+            <img
+              src="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_12.jpg"
+              alt=""
+            />
+          </Left>
+          <Right>
+            <img
+              src="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_20.jpg"
+              alt=""
+            />
+            <img
+              src="https://ksassets.timeincuk.net/wp/uploads/sites/56/2021/01/Small-bedroom-Ideal-Home.jpg"
+              alt=""
+            />
+          </Right>
+        </Gallery>
+      </SRLWrapper>
       <Title>
         Kost Apik UMS Melati Indah Tipe A Laweyan Surakarta 3L8F4A8C
       </Title>
