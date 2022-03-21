@@ -46,7 +46,7 @@ function Detail() {
         </Adress>
       </Info>
       <Description>
-        <h3>Deskripsi</h3>
+        <h3>Keterangan</h3>
         <p>
           Berlokasi di Foresta Studento BSD City, co-living ini adalah hunian
           ideal bagi mahasiswa, karyawan, bahkan suami istri yang mencari kost
@@ -91,6 +91,32 @@ function Detail() {
           </FasilitasItem>
         </WrapperFasilitas>
       </Fasilitas>
+      <Location>
+        <h3>Lokasi</h3>
+        <WrapperLocation>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15923.058379053375!2d122.0496515!3d-3.8606185499999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9848902aab2275%3A0x51ee32fb330f7eae!2sNugraha%20Hotel!5e0!3m2!1sen!2sid!4v1647749380813!5m2!1sen!2sid"
+            loading="lazy"
+          ></iframe>
+        </WrapperLocation>
+      </Location>
+      <CTA>
+        <LeftCTA>
+          <Title>
+            Kost Apik UMS Melati Indah Tipe A Laweyan Surakarta 3L8F4A8C
+          </Title>
+          <Adress>
+            <span>
+              Studento Blok L 22/9. Foresta, BSD City. Pagedangan. Banten,
+              Tangerang, Banten 15331
+            </span>
+          </Adress>
+        </LeftCTA>
+        <RightCTA>
+          <Price>IDR 650.000 / Bulan</Price>
+          <Button>Hubungi Pemilik</Button>
+        </RightCTA>
+      </CTA>
     </Container>
   );
 }
@@ -99,6 +125,7 @@ export default Detail;
 
 const Container = styled.div`
   padding: 20px 3vw;
+  padding-bottom: 50px;
 `;
 
 const Gallery = styled.div`
@@ -173,7 +200,7 @@ const Fasilitas = styled.div`
 
   h3 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 `;
 
@@ -204,7 +231,7 @@ const Description = styled.div`
   border-top: 1px solid lightgray;
   h3 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   p {
@@ -212,4 +239,68 @@ const Description = styled.div`
     font-weight: 300;
     line-height: 26px;
   }
+`;
+const Location = styled.div`
+  margin: 30px 0;
+  padding: 30px 0;
+  border-top: 1px solid lightgray;
+  h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+`;
+const WrapperLocation = styled.div`
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  iframe {
+    width: 100%;
+    min-height: 400px;
+    border: none;
+  }
+`;
+
+const CTA = styled.div`
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 20px 3vw;
+  justify-content: space-between;
+  gap: 4px;
+  box-shadow: rgb(0 0 0 / 8%) 0px 4px 32px 4px;
+  align-items: center;
+  ${Title} {
+    font-size: 16px;
+  }
+
+  ${Adress} {
+    font-size: 16px;
+    color: #666666;
+  }
+`;
+
+const LeftCTA = styled.div``;
+const RightCTA = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
+const Price = styled.div`
+  font-weight: 500;
+`;
+
+const Button = styled.div`
+  border-radius: 4px;
+  font-weight: 400;
+  padding: 12px 32px;
+  font-size: 16px;
+  color: white;
+  display: flex;
+  background: #35b0a7;
+  border-color: #35b0a7;
+  cursor: pointer;
 `;
