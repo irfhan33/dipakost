@@ -12,6 +12,30 @@ function ImgCarousel() {
     slidesToScroll: 1,
     centerMode: true,
     autoplay: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          infinite: true,
+          speed: 500,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          autoplay: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          infinite: true,
+          speed: 500,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: false,
+          autoplay: true,
+        },
+      },
+    ],
   };
   return (
     <Container>

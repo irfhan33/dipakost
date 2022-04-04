@@ -13,7 +13,7 @@ function Navbar() {
         <NavMenuItem>Syarat dan Ketentuan</NavMenuItem>
       </NavMenu>
       <Search>
-        <span>Mau ngekost di daerah mana?</span>
+        <span>Cari kost di daerah mana?</span>
         <SearchIcon className="icon_search" />
       </Search>
       <LoginButton>MASUK</LoginButton>
@@ -42,6 +42,10 @@ const Logo = styled.div`
 const NavMenu = styled.div`
   display: flex;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const NavMenuItem = styled.div`
   display: flex;
@@ -87,6 +91,17 @@ const Search = styled.div`
   width: 270px;
   transition: all 250ms;
 
+  @media (max-width: 768px) {
+    padding: 0 4px;
+  }
+
+  span {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .icon_search {
     margin-left: auto;
     color: #00b1ac;
