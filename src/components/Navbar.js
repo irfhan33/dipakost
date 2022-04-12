@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 function Navbar() {
   const [modal, setModal] = useState(false);
   const [modalstatus, setModalstatus] = useState("default");
@@ -97,7 +98,18 @@ function Navbar() {
 
                       <button>Login</button>
                       <p>
-                        Belum punya akun MuliKost? <span>Daftar Sekarang</span>
+                        Belum punya akun MuliKost?
+                        <span>
+                          <Link
+                            to={`${
+                              modalstatus === "loginowner"
+                                ? "/registerowner"
+                                : "/register"
+                            }`}
+                          >
+                            Daftar Sekarang
+                          </Link>
+                        </span>
                       </p>
                     </form>
                   </ModalLogin>
@@ -253,7 +265,7 @@ const ModalBox = styled.div`
   }
 
   p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     color: #383746;
@@ -265,15 +277,15 @@ const Card = styled.div`
   box-shadow: 0 -1px 4px rgb(0 0 0 / 4%), 0 4px 8px rgb(0 0 0 / 8%);
   cursor: pointer;
   padding: 16px;
-  height: 70px;
+  height: 80px;
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
   width: auto;
 
   span {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 24px;
   }
@@ -303,7 +315,7 @@ const ModalLogin = styled.div`
 
   h1 {
     color: #2e2d39;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     display: block;
     margin: 0;
@@ -311,7 +323,7 @@ const ModalLogin = styled.div`
 
   p {
     color: #383746;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.75;
     margin-top: 5px;
 
@@ -323,7 +335,7 @@ const ModalLogin = styled.div`
   }
   form {
     label {
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.75;
       color: #383746;
       margin-bottom: 4px;
@@ -335,7 +347,7 @@ const ModalLogin = styled.div`
       border-bottom: 1.5px solid lightgray;
       width: 100%;
       padding-bottom: 8px;
-      font-size: 12px;
+      font-size: 14px;
       margin-bottom: 10px;
       transition: all 250ms;
 
