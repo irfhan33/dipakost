@@ -4,10 +4,16 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 function Navbar() {
   const [modal, setModal] = useState(false);
   const [modalstatus, setModalstatus] = useState("default");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [data, setData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     if (modal) {
       document.body.style.overflow = "hidden";
@@ -16,6 +22,59 @@ function Navbar() {
     }
   }, [modal]);
 
+  async function loginOwner(e) {
+    e.preventDefault();
+
+    // Check Username
+    await getDocs(
+      query(collection(db, "pemilik_kost"), where("username", "==", username))
+    )
+      .then((snapshot) => {
+        setData(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    // Check Password
+    if (password !== data[0].password) {
+      alert("Password Salah");
+    } else {
+      alert("Login Berhasil");
+      navigate("/dashboard");
+    }
+  }
+
+  async function loginUser(e) {
+    e.preventDefault();
+    // Check Username
+    await getDocs(
+      query(collection(db, "user"), where("username", "==", username))
+    )
+      .then((snapshot) => {
+        setData(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    // Check Password
+    if (password !== data[0].password) {
+      alert("Password Salah");
+    } else {
+      alert("Login Berhasil");
+    }
+  }
   return (
     <>
       <Container>
@@ -77,14 +136,20 @@ function Navbar() {
                       </h1>
                     </HeaderModal>
 
-                    <form action="">
+                    <form
+                      action=""
+                      autoComplete="off"
+                      onSubmit={
+                        modalstatus === "loginowner" ? loginOwner : loginUser
+                      }
+                    >
                       <label htmlFor="username">Username</label>
                       <input
                         type="text"
                         id="username"
                         name="username"
+                        onChange={(e) => setUsername(e.target.value)}
                         placeholder="Masukkan Username"
-                        autoComplete="false"
                       />
 
                       <label htmlFor="password">Password</label>
@@ -92,11 +157,11 @@ function Navbar() {
                         type="text"
                         id="password"
                         name="password"
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="Masukkan Password"
-                        autoComplete="false"
                       />
 
-                      <button>Login</button>
+                      <button type="submit">Login</button>
                       <p>
                         Belum punya akun MuliKost?
                         <span>

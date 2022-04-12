@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD6bQhn51U6BscMNZbcp8_U9tZvMlCsXpc",
-  authDomain: "dipa-kost.firebaseapp.com",
-  projectId: "dipa-kost",
-  storageBucket: "dipa-kost.appspot.com",
-  messagingSenderId: "702902862966",
-  appId: "1:702902862966:web:5086c1e61df20f9de44b57",
+  apiKey: "AIzaSyBRE4pgcFI8krc6oVjGRK4a1V-fM-2Ohr4",
+  authDomain: "muli-kost.firebaseapp.com",
+  projectId: "muli-kost",
+  storageBucket: "muli-kost.appspot.com",
+  messagingSenderId: "417322969205",
+  appId: "1:417322969205:web:bcf77462bdc97e1588f03c",
 };
 
 // Initialize Firebase

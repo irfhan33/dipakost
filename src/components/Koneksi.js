@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { db } from "../firebaseConfig";
 function Koneksi() {
   const koneksi = () => {
-    if (db._app.options.projectId !== "dipa-kost") {
+    if (db._app.options.projectId !== "muli-kost") {
       alert("Koneksi Gagal");
     } else {
       alert("Koneksi Berhasil");

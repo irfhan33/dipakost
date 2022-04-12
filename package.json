@@ -24,6 +24,7 @@
     "simple-react-lightbox": "^3.6.9-0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.3",
+    "sweetalert2": "^11.4.8",
     "util": "^0.12.4",
     "web-vitals": "^2.1.0"
   },

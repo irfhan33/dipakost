@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
 
 function Register() {
+  let navigate = useNavigate();
+
+  const [fields, setFields] = useState({
+    nama: "",
+    username: "",
+    password: "",
+    nomor_hp: "",
+    email: "",
+    profile: "",
+  });
+
+  function fieldHandler(e) {
+    const name = e.target.getAttribute("name");
+    setFields({
+      ...fields,
+      [name]: e.target.value,
+    });
+  }
+
+  function registerUser(e) {
+    e.preventDefault();
+
+    addDoc(collection(db, "user"), {
+      username: fields.username,
+      password: fields.password,
+      nomor_hp: fields.nomor_hp,
+      email: fields.email,
+      profile: fields.profile,
+    }).then(() => {
+      navigate("/");
+    });
+  }
+
   return (
     <>
       <Navbar />
@@ -16,63 +51,71 @@ function Register() {
             </Link>
             <h1>Daftar Akun Pencari Kost</h1>
           </FormHeader>
-          <FormItem>
-            <label htmlFor="nama">Nama Lengkap</label>
-            <input
-              type="text"
-              id="nama"
-              nane="nama"
-              placeholder="Masukkan Nama Lengkap Anda"
-            />
-          </FormItem>
-          <FormItem>
-            <label htmlFor="nama">Username</label>
-            <input
-              type="text"
-              id="username"
-              nane="username"
-              placeholder="Masukkan Username Anda"
-            />
-          </FormItem>
-          <FormItem>
-            <label htmlFor="nama">Password</label>
-            <input
-              type="password"
-              id="password"
-              nane="password"
-              placeholder="Masukkan Password Anda"
-            />
-          </FormItem>
-          <FormItem>
-            <label htmlFor="nama">Nomor HP</label>
-            <input
-              type="password"
-              id="password"
-              nane="password"
-              placeholder="Masukkan Nomor HP Anda"
-            />
+          <form action="" onSubmit={registerUser}>
             <FormItem>
-              <label htmlFor="nama">Email</label>
+              <label htmlFor="nama">Nama Lengkap</label>
+              <input
+                type="text"
+                id="nama"
+                name="nama"
+                onChange={fieldHandler}
+                placeholder="Masukkan Nama Lengkap Anda"
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="nama">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                onChange={fieldHandler}
+                placeholder="Masukkan Username Anda"
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                onChange={fieldHandler}
+                placeholder="Masukkan Password Anda"
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="nomor_hp">Nomor HP</label>
+              <input
+                type="text"
+                id="nomor_hp"
+                onChange={fieldHandler}
+                name="nomor_hp"
+                placeholder="Masukkan Nomor HP Anda"
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
+                onChange={fieldHandler}
                 id="email"
-                nane="email"
+                name="email"
                 placeholder="Masukkan Email Anda"
               />
             </FormItem>
             <FormItem>
-              <label htmlFor="nama">Profile</label>
+              <label htmlFor="profile">URL Profile</label>
               <input
                 type="profile"
+                onChange={fieldHandler}
                 id="profile"
-                nane="profile"
-                placeholder="Masukkan Profile Anda"
+                name="profile"
+                placeholder="Masukkan URL Profile Anda"
               />
             </FormItem>
-          </FormItem>
-          <FormItem>
-            <button>Daftar</button>
-          </FormItem>
+            <FormItem>
+              <button>Daftar</button>
+            </FormItem>
+          </form>
         </FormWrapper>
       </Container>
     </>
