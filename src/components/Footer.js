@@ -4,10 +4,10 @@ import styled from "styled-components";
 function Footer() {
   return (
     <Container>
-      <Logo>dipakost</Logo>
+      <Logo>mulikost</Logo>
       <h1>Cari Info Kost Terbaru</h1>
       <p>
-        dipakost adalah sebuah platform yang menyajikan informasi mengenai
+        mulikost adalah sebuah platform yang menyajikan informasi mengenai
         properti Indekos atau kost yang disewakan seluruh Indonesia dilengkapi
         dengan harga kost, fasilitas kost dan gambar kost yang diunggah langsung
         oleh pemilik kost. Platform kami memberikan kemudahan bagi kamu yang
@@ -34,7 +34,7 @@ function Footer() {
         yang ada di Indonesia.
       </p>
       <hr />
-      <span>© 2022 dipakost, All rights reserved</span>
+      <span>© 2022 mulikost, All rights reserved</span>
     </Container>
   );
 }

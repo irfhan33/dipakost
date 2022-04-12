@@ -78,11 +78,11 @@ function Navbar() {
   return (
     <>
       <Container>
-        <Logo>dipakost</Logo>
+        <Logo>mulikost</Logo>
         <NavMenu>
           <NavMenuItem>Sewakan Propertimu</NavMenuItem>
           <NavMenuItem>Area Populer</NavMenuItem>
-          <NavMenuItem>Tentang Dipakost</NavMenuItem>
+          <NavMenuItem>Tentang mulikost</NavMenuItem>
           <NavMenuItem>Syarat dan Ketentuan</NavMenuItem>
         </NavMenu>
         <Search>
