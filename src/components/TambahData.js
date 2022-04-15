@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function TambahData() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [fields, setFields] = useState({
     nama_kost: "",
     lokasi_gmaps: "",
@@ -18,6 +18,12 @@ function TambahData() {
     gambar1: "",
     gambar2: "",
     gambar3: "",
+    kategori: "",
+    area: "",
+  });
+
+  const [cb, setCb] = useState({
+    kasur: false,
   });
 
   function fieldHandler(e) {
@@ -41,7 +47,14 @@ function TambahData() {
       gambar1: fields.gambar1,
       gambar2: fields.gambar2,
       gambar3: fields.gambar3,
+      kategori: fields.kategori,
+      area: fields.area,
     }).then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Tambah Data Berhasil",
+        showConfirmButton: false,
+      });
       navigate("/dashboard");
     });
   }
@@ -57,7 +70,18 @@ function TambahData() {
       gambar1: "",
       gambar2: "",
       gambar3: "",
+      kategori: "",
+      area: "",
     });
+  }
+
+  function cbHandler(e) {
+    const name = e.target.getAttribute("name");
+    setCb({
+      ...cb,
+      [name]: e.target.checked,
+    });
+    console.log(cb);
   }
 
   return (
@@ -167,6 +191,40 @@ function TambahData() {
               />
             </FormItem>
             <FormItem>
+              <label htmlFor="kategori">Kategori</label>
+              <input
+                type="text"
+                id="kategori"
+                value={fields.kategori}
+                name="kategori"
+                onChange={fieldHandler}
+                placeholder="Masukkan Kategori Kost"
+              />
+            </FormItem>
+            <FormItem>
+              <label htmlFor="area">Area</label>
+              <input
+                type="text"
+                id="area"
+                value={fields.area}
+                name="area"
+                onChange={fieldHandler}
+                placeholder="Masukkan Area Kost"
+              />
+            </FormItem>
+            {/* <h3>Fasilitas</h3>
+            <FormItemCb>
+              <label htmlFor="kasur">Kasur</label>
+              <input
+                type="checkbox"
+                id="kasur"
+                name="kasur"
+                onChange={cbHandler}
+              />
+            </FormItemCb> */}
+
+            {/* Button */}
+            <FormItem>
               <button>Tambah Data</button>
             </FormItem>
           </form>
@@ -198,9 +256,15 @@ const FormContainer = styled.div`
   border-radius: 10px;
   box-shadow: rgb(145 158 171 / 20%) 0px 0px 2px 0px,
     rgb(145 158 171 / 12%) 0px 12px 24px -4px;
+
+  h3 {
+    display: block;
+    margin-bottom: 26px;
+    color: #1baa56;
+  }
 `;
 const FormItem = styled.div`
-  input {
+  input[type="text"] {
     display: flex;
     height: 46px;
     border: 1px solid lightgray;
@@ -209,6 +273,14 @@ const FormItem = styled.div`
     border-radius: 4px;
     padding: 0 10px;
     margin-bottom: 16px;
+    &:focus {
+      border: 1px solid #1baa56;
+    }
+  }
+
+  input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
     &:focus {
       border: 1px solid #1baa56;
     }
@@ -231,5 +303,16 @@ const FormItem = styled.div`
     cursor: pointer;
     height: 46px;
     font-weight: bold;
+  }
+`;
+
+const FormItemCb = styled(FormItem)`
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  label {
+    margin-bottom: 0px;
+    margin-right: 10px;
   }
 `;

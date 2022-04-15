@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { IconButton } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 function Navbar() {
   const [modal, setModal] = useState(false);
@@ -26,54 +26,54 @@ function Navbar() {
     e.preventDefault();
 
     // Check Username
-    await getDocs(
+    getDocs(
       query(collection(db, "pemilik_kost"), where("username", "==", username))
     )
       .then((snapshot) => {
-        setData(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-        );
+        // setData(
+        //   snapshot.docs.map((doc) => ({
+        //     id: doc.id,
+        //     ...doc.data(),
+        //   }))
+        // );
+        snapshot.docs.map((doc) => {
+          if (password !== doc.data().password) {
+            alert("Password atau Username Salah");
+          } else {
+            setModal(false);
+            alert("Login Berhasil");
+            navigate("/dashboard");
+          }
+        });
       })
       .catch((err) => {
         console.log(err.message);
       });
-
-    // Check Password
-    if (password !== data[0].password) {
-      alert("Password Salah");
-    } else {
-      alert("Login Berhasil");
-      navigate("/dashboard");
-    }
   }
 
-  async function loginUser(e) {
+  function loginUser(e) {
     e.preventDefault();
     // Check Username
-    await getDocs(
-      query(collection(db, "user"), where("username", "==", username))
-    )
+    getDocs(query(collection(db, "user"), where("username", "==", username)))
       .then((snapshot) => {
-        setData(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-        );
+        // setData(
+        //   snapshot.docs.map((doc) => ({
+        //     id: doc.id,
+        //     ...doc.data(),
+        //   }))
+        // );
+        snapshot.docs.map((doc) => {
+          if (password !== doc.data().password) {
+            alert("Password atau Username Salah");
+          } else {
+            alert("Login Berhasil");
+            navigate("/");
+          }
+        });
       })
       .catch((err) => {
         console.log(err.message);
       });
-
-    // Check Password
-    if (password !== data[0].password) {
-      alert("Password Salah");
-    } else {
-      alert("Login Berhasil");
-    }
   }
   return (
     <>

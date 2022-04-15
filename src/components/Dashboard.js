@@ -6,6 +6,8 @@ import {
   doc,
   getDocs,
   onSnapshot,
+  orderBy,
+  query,
 } from "firebase/firestore";
 import { db } from "./../firebaseConfig";
 import AddIcon from "@mui/icons-material/Add";
@@ -18,14 +20,17 @@ function Dashboard() {
   const [kosts, setKosts] = useState([]);
 
   useEffect(() => {
-    onSnapshot(colRef, (snapshot) => {
-      setKosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-      );
-    });
+    onSnapshot(
+      query(collection(db, "kost"), orderBy("nama_kost", "asc")),
+      (snapshot) => {
+        setKosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+        );
+      }
+    );
   }, []);
 
   const deleteData = async (id) => {
@@ -51,14 +56,12 @@ function Dashboard() {
       <Content>
         <ContentHeader>
           <h1>Data Kost Muli</h1>
-          <ButtonTambahData>
-            <AddIcon />
-            <Link to="/tambah-data" style={{ color: "white" }}>
-              <div>
-                <span>Tambah Data</span>
-              </div>
-            </Link>
-          </ButtonTambahData>
+          <Link to="/tambah-data">
+            <ButtonTambahData>
+              <AddIcon />
+              <span>Tambah Data</span>
+            </ButtonTambahData>
+          </Link>
         </ContentHeader>
 
         <TableWrapper>
@@ -166,6 +169,11 @@ const Content = styled.div`
       padding: 16px 16px;
       text-align: left;
       white-space: nowrap;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 1; /* number of lines to show */
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     td {
