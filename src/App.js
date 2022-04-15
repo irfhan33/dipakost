@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import RegisterOwner from "./components/RegisterOwner";
 import Dashboard from "./components/Dashboard";
 import TambahData from "./components/TambahData";
+import EditData from "./components/EditData";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/registerowner" element={<RegisterOwner />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tambah-data" element={<TambahData />} />
+        <Route path="/edit-data/:id" element={<EditData />} />
       </Routes>
     </BrowserRouter>
   );

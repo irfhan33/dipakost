@@ -1,31 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./../firebaseConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-function TambahData() {
+function EditData() {
+  const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
   const [fields, setFields] = useState({
-    nama_kost: "Kost Muli",
+    nama_kost: "",
     lokasi_gmaps: "",
-    harga: "30000",
+    harga: "",
     alamat: "",
     type: "",
     keterangan: "",
-    gambar1:
-      "https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_12.jpg",
+    gambar1: "",
     gambar2: "",
     gambar3: "",
-    kategori: "rekomendasi",
-    area: "Kota Makassar",
+    kategori: "",
+    area: "",
   });
 
-  const [cb, setCb] = useState({
-    kasur: false,
-  });
+  useEffect(() => {
+    getDoc(doc(db, "kost", id)).then((doc) => {
+      const data = doc.data();
+      setFields({
+        nama_kost: data.nama_kost,
+        lokasi_gmaps: data.lokasi_gmaps,
+        harga: data.harga,
+        alamat: data.alamat,
+        type: data.type,
+        keterangan: data.keterangan,
+        gambar1: data.gambar1,
+        gambar2: data.gambar2,
+        gambar3: data.gambar3,
+        kategori: data.kategori,
+        area: data.area,
+      });
+    });
+  }, []);
 
   function fieldHandler(e) {
     const name = e.target.getAttribute("name");
@@ -35,10 +51,10 @@ function TambahData() {
     });
   }
 
-  function tambahdataHandler(e) {
+  function editdataHandler(e) {
     e.preventDefault();
 
-    addDoc(collection(db, "kost"), {
+    updateDoc(doc(db, "kost", id), {
       nama_kost: fields.nama_kost,
       lokasi_gmaps: fields.lokasi_gmaps,
       harga: fields.harga,
@@ -53,45 +69,20 @@ function TambahData() {
     }).then(() => {
       Swal.fire({
         icon: "success",
-        title: "Tambah Data Berhasil",
+        title: "Edit Data Berhasil",
         showConfirmButton: false,
       });
       navigate("/dashboard");
     });
   }
 
-  function resetForm() {
-    setFields({
-      nama_kost: "",
-      lokasi_gmaps: "",
-      harga: "",
-      alamat: "",
-      type: "",
-      keterangan: "",
-      gambar1: "",
-      gambar2: "",
-      gambar3: "",
-      kategori: "",
-      area: "",
-    });
-  }
-
-  function cbHandler(e) {
-    const name = e.target.getAttribute("name");
-    setCb({
-      ...cb,
-      [name]: e.target.checked,
-    });
-    console.log(cb);
-  }
-
   return (
     <Container>
       <Sidebar />
       <Content>
-        <h1>Tambah Data</h1>
+        <h1>Edit Data</h1>
         <FormContainer>
-          <form action="" autoComplete="off" onSubmit={tambahdataHandler}>
+          <form action="" autoComplete="off" onSubmit={editdataHandler}>
             <FormItem>
               <label htmlFor="nama_kost">Nama Kost</label>
               <input
@@ -226,7 +217,7 @@ function TambahData() {
 
             {/* Button */}
             <FormItem>
-              <button>Tambah Data</button>
+              <button>Edit Data</button>
             </FormItem>
           </form>
         </FormContainer>
@@ -235,7 +226,7 @@ function TambahData() {
   );
 }
 
-export default TambahData;
+export default EditData;
 
 const Container = styled.div`
   display: flex;

@@ -15,8 +15,8 @@ import Sidebar from "./Sidebar";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 function Dashboard() {
-  const colRef = collection(db, "kost");
   const [kosts, setKosts] = useState([]);
 
   useEffect(() => {
@@ -77,6 +77,8 @@ function Dashboard() {
                 <th>Gambar 1</th>
                 <th>Gambar 2</th>
                 <th>Gambar 3</th>
+                <th>Kategori</th>
+                <th>Area</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -112,10 +114,21 @@ function Dashboard() {
                     <p>{kost.gambar3}</p>
                   </td>
                   <td>
-                    <DeleteIcon
-                      className="delete-icon"
-                      onClick={deleteData.bind(this, kost.id)}
-                    />
+                    <p>{kost.kategori}</p>
+                  </td>
+                  <td>
+                    <p>{kost.area}</p>
+                  </td>
+                  <td>
+                    <ActionWrapper>
+                      <DeleteIcon
+                        className="delete-icon"
+                        onClick={deleteData.bind(this, kost.id)}
+                      />
+                      <Link to={`/edit-data/${kost.id}`}>
+                        <EditIcon className="edit-icon" />
+                      </Link>
+                    </ActionWrapper>
                   </td>
                 </tr>
               ))}
@@ -197,6 +210,12 @@ const Content = styled.div`
         display: block;
         cursor: pointer;
       }
+      .edit-icon {
+        color: gray;
+        margin: 0 auto;
+        display: block;
+        cursor: pointer;
+      }
     }
   }
 `;
@@ -226,4 +245,9 @@ const ButtonTambahData = styled.div`
   span {
     margin-left: 4px;
   }
+`;
+
+const ActionWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;

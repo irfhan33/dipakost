@@ -6,7 +6,8 @@ import Slider from "react-slick";
 import KostItem from "./KostItem";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-function KostList({ title }) {
+function KostList({ title, kosts }) {
+  console.log(kosts);
   const carouselRef = useRef(null);
 
   const settings = {
@@ -43,54 +44,15 @@ function KostList({ title }) {
         </Right>
       </Header>
       <Carousel ref={carouselRef} {...settings}>
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/700x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_1_.jpg"
-          detailAdress="Kost Apik UMS Melati Indah Tipe A Laweyan Surakarta 3L8F4A8C"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_25_.JPG"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_59_.JPG"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_87_.jpg"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/700x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_1_.jpg"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_25_.JPG"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_59_.JPG"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
-        <KostItem
-          image="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Emerald-Anarta-House_Januari2021_87_.jpg"
-          detailAdress="Jl. Macan No.20a, Bonto Biraeng, Kec. Mamajang dwadwa"
-          highlightAdress="Kota Makassar"
-          price="693.000"
-        />
+        {kosts.map((kost) => (
+          <KostItem
+            key={kost.id}
+            image={kost.gambar1}
+            detailAdress={kost.nama_kost}
+            highlightAdress={kost.area}
+            price={kost.harga}
+          />
+        ))}
       </Carousel>
     </Container>
   );
