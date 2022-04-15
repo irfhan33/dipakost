@@ -36,9 +36,14 @@ function Navbar() {
         //     ...doc.data(),
         //   }))
         // );
+
+        if (!snapshot.size) {
+          return alert("Username Tidak Terdaftar");
+        }
+
         snapshot.docs.map((doc) => {
           if (password !== doc.data().password) {
-            alert("Password atau Username Salah");
+            alert("Password Salah");
           } else {
             setModal(false);
             alert("Login Berhasil");
@@ -62,9 +67,12 @@ function Navbar() {
         //     ...doc.data(),
         //   }))
         // );
+        if (!snapshot.size) {
+          return alert("Username Tidak Terdaftar");
+        }
         snapshot.docs.map((doc) => {
           if (password !== doc.data().password) {
-            alert("Password atau Username Salah");
+            alert("Password Salah");
           } else {
             alert("Login Berhasil");
             navigate("/");
