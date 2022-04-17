@@ -86,7 +86,9 @@ function Navbar() {
   return (
     <>
       <Container>
-        <Logo>mulikost</Logo>
+        <Link to="/">
+          <Logo>mulikost</Logo>
+        </Link>
         <NavMenu>
           <NavMenuItem>Sewakan Propertimu</NavMenuItem>
           <NavMenuItem>Area Populer</NavMenuItem>
@@ -97,7 +99,7 @@ function Navbar() {
           <span>Cari kost di daerah mana?</span>
           <SearchIcon className="icon_search" />
         </Search>
-        <LoginButton onClick={() => setModal(true)}>MASUK</LoginButton>
+        <LoginButton onClick={() => setModal(true)}>Masuk</LoginButton>
       </Container>
 
       {modal && (
@@ -300,8 +302,7 @@ const LoginButton = styled.div`
   align-items: center;
   padding: 0 10px;
   border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
   transition: all 250ms;
   cursor: pointer;
 

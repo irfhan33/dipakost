@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 
 function EditData() {
   const { id } = useParams();
-  console.log(id);
   const navigate = useNavigate();
   const [fields, setFields] = useState({
     nama_kost: "",

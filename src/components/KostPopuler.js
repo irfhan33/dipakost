@@ -1,68 +1,63 @@
 import React from "react";
 import styled from "styled-components";
 import { Title } from "./KostList";
+import { Link } from "react-router-dom";
 
 function KostPopuler() {
+  const areas = [
+    {
+      id: 1,
+      img: "https://img.inews.co.id/media/600/files/inews_new/2021/09/20/10_tempat_Wisata_di_Makassar.JPG",
+      area: "Makassar",
+    },
+    {
+      id: 2,
+      img: "https://apollo-singapore.akamaized.net/v1/files/r5t1ifexqt0e2-ID/image;s=850x0",
+      area: "Rappocini",
+    },
+    {
+      id: 3,
+      img: "https://imganuncios.mitula.net/rumah_mewah_bukit_villa_panakukang_mas_harga_termurah_1540039645362207037.jpg",
+      area: "Panakukang",
+    },
+    {
+      id: 4,
+      img: "https://cdn-2.tstatic.net/makassar/foto/bank/images/citragrand-galesong-city-merilis-rumah-tipe-baru-dengan-harga-terjangkau.jpg",
+      area: "Gowa",
+    },
+    {
+      id: 5,
+      img: "https://id1-cdn.pgimgs.com/listing/18330017/UPHO.103965206.V800/PERUMAHAN-GIGIT-JALAN-POROS-PERINTIS-KEMERDEKAAN-Makassar-Indonesia.jpg",
+      area: "Perintis",
+    },
+    {
+      id: 6,
+      img: "https://id2-cdn.pgimgs.com/listing/18211638/UPHO.102766959.V550/Gemilang-Harvest-Makassar-Indonesia.jpg",
+      area: "Tamalanrea",
+    },
+    {
+      id: 7,
+      img: "https://imganuncios.mitula.net/rumah_dijual_di_tamalate_makassar_5750014646139605470.jpg",
+      area: "Tallo",
+    },
+    {
+      id: 8,
+      img: "https://img.inews.co.id/media/600/files/inews_new/2021/09/20/10_tempat_Wisata_di_Makassar.JPG",
+      area: "Makassar",
+    },
+  ];
   return (
     <Container>
       <Title>Area Kost Populer</Title>
       <Wrapper>
-        <Item>
-          <img
-            src="https://img.inews.co.id/media/600/files/inews_new/2021/09/20/10_tempat_Wisata_di_Makassar.JPG"
-            alt=""
-          />
-          <span>Makassar</span>
-        </Item>
-        <Item>
-          <img
-            src="https://apollo-singapore.akamaized.net/v1/files/r5t1ifexqt0e2-ID/image;s=850x0"
-            alt=""
-          />
-          <span>Rappocini</span>
-        </Item>
-        <Item>
-          <img
-            src="https://imganuncios.mitula.net/rumah_mewah_bukit_villa_panakukang_mas_harga_termurah_1540039645362207037.jpg"
-            alt=""
-          />
-          <span>Panakukang</span>
-        </Item>
-        <Item>
-          <img
-            src="https://cdn-2.tstatic.net/makassar/foto/bank/images/citragrand-galesong-city-merilis-rumah-tipe-baru-dengan-harga-terjangkau.jpg"
-            alt=""
-          />
-          <span>Gowa</span>
-        </Item>
-        <Item>
-          <img
-            src="https://id1-cdn.pgimgs.com/listing/18330017/UPHO.103965206.V800/PERUMAHAN-GIGIT-JALAN-POROS-PERINTIS-KEMERDEKAAN-Makassar-Indonesia.jpg"
-            alt=""
-          />
-          <span>Perintis</span>
-        </Item>
-        <Item>
-          <img
-            src="https://imganuncios.mitula.net/rumah_dijual_di_tamalate_makassar_4420014646139432933.jpg"
-            alt=""
-          />
-          <span>Tamalate</span>
-        </Item>
-        <Item>
-          <img
-            src="https://id2-cdn.pgimgs.com/listing/18211638/UPHO.102766959.V550/Gemilang-Harvest-Makassar-Indonesia.jpg"
-            alt=""
-          />
-          <span>Tamalanrea</span>
-        </Item>
-        <Item>
-          <img
-            src="https://imganuncios.mitula.net/rumah_dijual_di_tamalate_makassar_5750014646139605470.jpg"
-            alt=""
-          />
-          <span>Tallo</span>
-        </Item>
+        {areas.map((area) => (
+          <Link to={`/area-populer/${area.area.toLowerCase()}`}>
+            <Item key={area.id}>
+              <img src={area.img} alt="" />
+              <span>{area.area}</span>
+            </Item>
+          </Link>
+        ))}
       </Wrapper>
     </Container>
   );

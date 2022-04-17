@@ -37,8 +37,12 @@ function Home() {
       <Navbar />
       <Container>
         <ImgCarousel />
-        <KostList title="Kost Rekomendasi" kosts={rekomendasi} />
-        <KostList title="Harga Eksklusif" kosts={eksklusif} />
+        <KostList
+          title="Kost Rekomendasi"
+          kosts={rekomendasi}
+          type="rekomendasi"
+        />
+        <KostList title="Harga Eksklusif" kosts={eksklusif} type="eksklusif" />
         <KostPopuler />
         <Footer />
       </Container>

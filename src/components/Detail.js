@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import FmdGoodRoundedIcon from "@mui/icons-material/FmdGoodRounded";
@@ -10,6 +10,9 @@ import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import HomeMaxOutlinedIcon from "@mui/icons-material/HomeMaxOutlined";
 import { SRLWrapper } from "simple-react-lightbox";
 import Navbar from "./Navbar";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { useParams } from "react-router-dom";
 function Detail() {
   const options = {
     buttons: {
@@ -26,6 +29,17 @@ function Detail() {
       size: "60px",
     },
   };
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getDoc(doc(db, "kost", id)).then((doc) => {
+      // const data = doc.data();
+      setData(doc.data());
+    });
+  }, []);
+
+  console.log(data);
   return (
     <>
       <Navbar />
@@ -33,56 +47,28 @@ function Detail() {
         <SRLWrapper options={options}>
           <Gallery>
             <Left>
-              <img
-                src="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_12.jpg"
-                alt=""
-              />
+              <img src={data.gambar1} alt="" />
             </Left>
             <Right>
-              <img
-                src="https://cdn.rukita.co/rukita/fit/800x500/media/buildings/building/Rukita-Foresta-BSD-9_Feb2020_20.jpg"
-                alt=""
-              />
-              <img
-                src="https://ksassets.timeincuk.net/wp/uploads/sites/56/2021/01/Small-bedroom-Ideal-Home.jpg"
-                alt=""
-              />
+              <img src={data.gambar2} alt="" />
+              <img src={data.gambar3} alt="" />
             </Right>
           </Gallery>
         </SRLWrapper>
-        <Title>
-          Kost Apik UMS Melati Indah Tipe A Laweyan Surakarta 3L8F4A8C
-        </Title>
+        <Title>{data.kost_name}</Title>
         <Info>
           <TypeKost>
             <PersonRoundedIcon className="icon" />
-            <span>Campur</span>
+            <span>{data.type}</span>
           </TypeKost>
           <Adress>
             <FmdGoodRoundedIcon className="icon" />
-            <span>
-              Studento Blok L 22/9. Foresta, BSD City. Pagedangan. Banten,
-              Tangerang, Banten 15331
-            </span>
+            <span>{data.alamat}</span>
           </Adress>
         </Info>
         <Description>
           <h3>Keterangan</h3>
-          <p>
-            Berlokasi di Foresta Studento BSD City, co-living ini adalah hunian
-            ideal bagi mahasiswa, karyawan, bahkan suami istri yang mencari kost
-            eksklusif di area BSD. Dengan posisi yang strategis, Rukita Foresta
-            juga memberi akses mudah ke kampus Prasetya Mulya, ICE BSD, Aeon
-            Mall, dan berbagai perkantoran seperti Grha Unilever. Semuanya
-            berjarak hanya 5 menit berkendara atau 15 menit berjalan kaki. Semua
-            kamar di Rukita Foresta sudah dilengkapi furnitur, termasuk kamar
-            mandi dalam, AC, WiFi, water heater, dan fasilitas laundry dan
-            cleaning kamar tanpa biaya tambahan. Untuk melindungi penghuni dari
-            paparan COVID-19, unit Rukita ini disterilkan secara rutin oleh Tim
-            Kebersihan kami. Semua unit Rukita juga dilengkapi dengan hand
-            sanitizer dan termometer yang bisa digunakan baik oleh penghuni
-            maupun semua tamu yang berkunjung.
-          </p>
+          <p>{data.keterangan}</p>
         </Description>
         <Fasilitas>
           <h3>Fasilitas</h3>
@@ -116,26 +102,18 @@ function Detail() {
         <Location>
           <h3>Lokasi</h3>
           <WrapperLocation>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15923.058379053375!2d122.0496515!3d-3.8606185499999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9848902aab2275%3A0x51ee32fb330f7eae!2sNugraha%20Hotel!5e0!3m2!1sen!2sid!4v1647749380813!5m2!1sen!2sid"
-              loading="lazy"
-            ></iframe>
+            <iframe src={data.lokasi_gmaps} loading="lazy"></iframe>
           </WrapperLocation>
         </Location>
         <CTA>
           <LeftCTA>
-            <Title>
-              Kost Apik UMS Melati Indah Tipe A Laweyan Surakarta 3L8F4A8C
-            </Title>
+            <Title>{data.nama_kost}</Title>
             <Adress>
-              <span>
-                Studento Blok L 22/9. Foresta, BSD City. Pagedangan. Banten,
-                Tangerang, Banten 15331
-              </span>
+              <span>{data.alamat}</span>
             </Adress>
           </LeftCTA>
           <RightCTA>
-            <Price>IDR 650.000 / Bulan</Price>
+            <Price>IDR {data.harga} / Bulan</Price>
             <Button>Hubungi Pemilik</Button>
           </RightCTA>
         </CTA>

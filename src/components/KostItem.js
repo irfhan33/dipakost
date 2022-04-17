@@ -22,17 +22,19 @@ const Container = styled.div`
   margin: 10px 10px;
   cursor: pointer;
   transition: all 250ms;
-
   &:hover {
     transform: scale(1.1);
   }
 `;
 
 const CardImg = styled.div`
+  height: 190px;
+
   img {
     width: 100%;
     height: 100%;
     border-radius: 4px;
+    object-fit: cover;
   }
 `;
 

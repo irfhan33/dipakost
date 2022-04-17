@@ -6,7 +6,8 @@ import Slider from "react-slick";
 import KostItem from "./KostItem";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-function KostList({ title, kosts }) {
+import { Link } from "react-router-dom";
+function KostList({ title, kosts, type }) {
   console.log(kosts);
   const carouselRef = useRef(null);
 
@@ -27,36 +28,46 @@ function KostList({ title, kosts }) {
   };
   return (
     <Container>
-      <Header>
-        <Title>{title}</Title>
-
-        <Right>
-          <ButtonAll>Lihat Semua</ButtonAll>
-          <Line />
-          <ArrowSlider>
-            <Back onClick={prev}>
-              <ArrowBackIosRoundedIcon className="arrow_icon" />
-            </Back>
-            <Next onClick={next}>
-              <ArrowForwardIosRoundedIcon className="arrow_icon" />
-            </Next>
-          </ArrowSlider>
-        </Right>
-      </Header>
+      <KostListHeader title={title} prev={prev} next={next} type={type} />
       <Carousel ref={carouselRef} {...settings}>
         {kosts.map((kost) => (
-          <KostItem
-            key={kost.id}
-            image={kost.gambar1}
-            detailAdress={kost.nama_kost}
-            highlightAdress={kost.area}
-            price={kost.harga}
-          />
+          <Link to={`/detail/${kost.id}`}>
+            <KostItem
+              key={kost.id}
+              image={kost.gambar1}
+              detailAdress={kost.nama_kost}
+              highlightAdress={kost.area}
+              price={kost.harga}
+            />
+          </Link>
         ))}
       </Carousel>
     </Container>
   );
 }
+
+const KostListHeader = ({ title, prev, next, type }) => {
+  return (
+    <Header>
+      <Title>{title}</Title>
+
+      <Right>
+        <Link to={`/view-all/${type}`}>
+          <ButtonAll>Lihat Semua</ButtonAll>
+        </Link>
+        <Line />
+        <ArrowSlider>
+          <Back onClick={prev}>
+            <ArrowBackIosRoundedIcon className="arrow_icon" />
+          </Back>
+          <Next onClick={next}>
+            <ArrowForwardIosRoundedIcon className="arrow_icon" />
+          </Next>
+        </ArrowSlider>
+      </Right>
+    </Header>
+  );
+};
 
 export default KostList;
 
