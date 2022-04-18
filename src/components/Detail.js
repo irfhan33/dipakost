@@ -9,10 +9,11 @@ import BedOutlinedIcon from "@mui/icons-material/BedOutlined";
 import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import HomeMaxOutlinedIcon from "@mui/icons-material/HomeMaxOutlined";
 import { SRLWrapper } from "simple-react-lightbox";
-import Navbar from "./Navbar";
+import Navbar, { ModalClose } from "./Navbar";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useParams } from "react-router-dom";
+import Modal from "./Modal";
 function Detail() {
   const options = {
     buttons: {
@@ -31,15 +32,22 @@ function Detail() {
   };
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     getDoc(doc(db, "kost", id)).then((doc) => {
-      // const data = doc.data();
       setData(doc.data());
     });
   }, []);
 
-  console.log(data);
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [modal]);
+
   return (
     <>
       <Navbar />
@@ -114,13 +122,47 @@ function Detail() {
           </LeftCTA>
           <RightCTA>
             <Price>IDR {data.harga} / Bulan</Price>
-            <Button>Hubungi Pemilik</Button>
+            <Button onClick={() => setModal(!modal)}>Pesan</Button>
           </RightCTA>
         </CTA>
       </Container>
+
+      {modal && (
+        <>
+          <ModalClose
+            onClick={() => {
+              setModal(!modal);
+            }}
+          ></ModalClose>
+          <Modal>
+            <h1>Informasi Pesanan</h1>
+            <InformasiPesanan data={data} />
+            <ButtonModal>Buat Pesanan</ButtonModal>
+          </Modal>
+        </>
+      )}
     </>
   );
 }
+
+const InformasiPesanan = ({ data }) => {
+  return (
+    <>
+      <InformasiPesananItem title="Nama Kost" value={data.nama_kost} />
+      <InformasiPesananItem title="Alamat" value={data.alamat} />
+      <InformasiPesananItem title="Type Kost" value={data.type} />
+      <InformasiPesananItem title="Harga" value={data.harga} />
+    </>
+  );
+};
+
+const InformasiPesananItem = ({ title, value }) => {
+  return (
+    <Wrapper>
+      <span>{title} </span> : <p> {value}</p>
+    </Wrapper>
+  );
+};
 
 export default Detail;
 
@@ -347,4 +389,22 @@ const Button = styled.div`
   border-color: #35b0a7;
   cursor: pointer;
   white-space: nowrap;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    min-width: 100px;
+  }
+
+  p {
+    margin-left: 20px;
+  }
+`;
+
+const ButtonModal = styled(Button)`
+  margin-top: 20px;
 `;

@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import Modal from "./Modal";
 function Navbar() {
   const [modal, setModal] = useState(false);
   const [modalstatus, setModalstatus] = useState("default");
@@ -111,86 +112,82 @@ function Navbar() {
             }}
           ></ModalClose>
           <Modal>
-            <ModalBackground>
-              <ModalBox>
-                {modalstatus === "default" ? (
-                  <ModalDefault>
-                    <h1>Masuk Ke Muli Kost</h1>
-                    <p>saya ingin masuk sebagai</p>
-                    <Card onClick={() => setModalstatus("loginuser")}>
-                      <img
-                        src="https://static-asset.mamikos.com/assets/bangul/illustrations/login-tenant.svg?version=2.11.0"
-                        alt=""
-                      />
-                      <span>Pencari Kost</span>
-                    </Card>
-                    <Card onClick={() => setModalstatus("loginowner")}>
-                      <img
-                        src="https://static-asset.mamikos.com/assets/bangul/illustrations/login-owner.svg?version=2.11.0"
-                        alt=""
-                      />
-                      <span>Pemilik Kost</span>
-                    </Card>
-                  </ModalDefault>
-                ) : (
-                  <ModalLogin>
-                    <HeaderModal>
-                      <ArrowBackIcon
-                        className="icon-back"
-                        onClick={() => setModalstatus("default")}
-                      />
-                      <h1>
-                        {modalstatus === "loginowner"
-                          ? "Login Pemilik Kost"
-                          : "Login Pencari Kost"}
-                      </h1>
-                    </HeaderModal>
+            {modalstatus === "default" ? (
+              <ModalDefault>
+                <h1>Masuk Ke Muli Kost</h1>
+                <p>saya ingin masuk sebagai</p>
+                <Card onClick={() => setModalstatus("loginuser")}>
+                  <img
+                    src="https://static-asset.mamikos.com/assets/bangul/illustrations/login-tenant.svg?version=2.11.0"
+                    alt=""
+                  />
+                  <span>Pencari Kost</span>
+                </Card>
+                <Card onClick={() => setModalstatus("loginowner")}>
+                  <img
+                    src="https://static-asset.mamikos.com/assets/bangul/illustrations/login-owner.svg?version=2.11.0"
+                    alt=""
+                  />
+                  <span>Pemilik Kost</span>
+                </Card>
+              </ModalDefault>
+            ) : (
+              <ModalLogin>
+                <HeaderModal>
+                  <ArrowBackIcon
+                    className="icon-back"
+                    onClick={() => setModalstatus("default")}
+                  />
+                  <h1>
+                    {modalstatus === "loginowner"
+                      ? "Login Pemilik Kost"
+                      : "Login Pencari Kost"}
+                  </h1>
+                </HeaderModal>
 
-                    <form
-                      action=""
-                      autoComplete="off"
-                      onSubmit={
-                        modalstatus === "loginowner" ? loginOwner : loginUser
-                      }
-                    >
-                      <label htmlFor="username">Username</label>
-                      <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Masukkan Username"
-                      />
+                <form
+                  action=""
+                  autoComplete="off"
+                  onSubmit={
+                    modalstatus === "loginowner" ? loginOwner : loginUser
+                  }
+                >
+                  <label htmlFor="username">Username</label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Masukkan Username"
+                  />
 
-                      <label htmlFor="password">Password</label>
-                      <input
-                        type="text"
-                        id="password"
-                        name="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Masukkan Password"
-                      />
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="text"
+                    id="password"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Masukkan Password"
+                  />
 
-                      <button type="submit">Login</button>
-                      <p>
-                        Belum punya akun MuliKost?
-                        <span>
-                          <Link
-                            to={`${
-                              modalstatus === "loginowner"
-                                ? "/registerowner"
-                                : "/register"
-                            }`}
-                          >
-                            Daftar Sekarang
-                          </Link>
-                        </span>
-                      </p>
-                    </form>
-                  </ModalLogin>
-                )}
-              </ModalBox>
-            </ModalBackground>
+                  <button type="submit">Login</button>
+                  <p>
+                    Belum punya akun MuliKost?
+                    <span>
+                      <Link
+                        to={`${
+                          modalstatus === "loginowner"
+                            ? "/registerowner"
+                            : "/register"
+                        }`}
+                      >
+                        Daftar Sekarang
+                      </Link>
+                    </span>
+                  </p>
+                </form>
+              </ModalLogin>
+            )}
           </Modal>
         </>
       )}
@@ -312,40 +309,6 @@ const LoginButton = styled.div`
   }
 `;
 
-const Modal = styled.div``;
-
-const ModalBackground = styled.div`
-  display: flex;
-  justify-content: center;
-  background: red;
-`;
-
-const ModalBox = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 30px 40px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 600px;
-  width: 100%;
-  z-index: 10;
-  position: fixed;
-  margin: 0 auto;
-  h1 {
-    font-size: 24px;
-    color: #383746;
-    margin-bottom: 24px;
-  }
-
-  p {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #383746;
-  }
-`;
-
 const Card = styled.div`
   border-radius: 4px;
   box-shadow: 0 -1px 4px rgb(0 0 0 / 4%), 0 4px 8px rgb(0 0 0 / 8%);
@@ -369,7 +332,7 @@ const Card = styled.div`
   }
 `;
 
-const ModalClose = styled.div`
+export const ModalClose = styled.div`
   position: fixed;
   z-index: 9;
   background: rgba(0, 0, 0, 0.3);
