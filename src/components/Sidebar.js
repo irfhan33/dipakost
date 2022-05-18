@@ -5,14 +5,20 @@ import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Avatar } from "@mui/material";
 import NavItem from "./NavItem";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUserName } from "../features/user/userSlice";
 function Sidebar() {
+  const user = useSelector(selectUserName);
+
+  console.log(user);
+
   return (
     <SidebarContainer>
       {/* Profile */}
       <Profile>
         <Avatar></Avatar>
         <InfoProfile>
-          <span>Muli</span>
+          <span>{user}</span>
           <p>Pemilik Kost</p>
         </InfoProfile>
       </Profile>

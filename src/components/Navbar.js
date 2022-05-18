@@ -3,11 +3,13 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import { useState, useEffect } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { IconButton } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import Modal from "./Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserName, setUserLogin } from "../features/user/userSlice";
 function Navbar() {
   const [modal, setModal] = useState(false);
   const [modalstatus, setModalstatus] = useState("default");
@@ -15,6 +17,9 @@ function Navbar() {
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUserName);
+
   useEffect(() => {
     if (modal) {
       document.body.style.overflow = "hidden";
@@ -48,6 +53,12 @@ function Navbar() {
           } else {
             setModal(false);
             alert("Login Berhasil");
+            dispatch(
+              setUserLogin({
+                name: doc.data().username,
+                email: doc.data().email,
+              })
+            );
             navigate("/dashboard");
           }
         });
@@ -76,6 +87,13 @@ function Navbar() {
             alert("Password Salah");
           } else {
             alert("Login Berhasil");
+            dispatch(
+              setUserLogin({
+                name: doc.data().username,
+                email: doc.data().email,
+              })
+            );
+            setModal(false);
             navigate("/");
           }
         });
@@ -84,6 +102,7 @@ function Navbar() {
         console.log(err.message);
       });
   }
+
   return (
     <>
       <Container>
@@ -100,7 +119,11 @@ function Navbar() {
           <span>Cari kost di daerah mana?</span>
           <SearchIcon className="icon_search" />
         </Search>
-        <LoginButton onClick={() => setModal(true)}>Masuk</LoginButton>
+        {user ? (
+          <Avatar />
+        ) : (
+          <LoginButton onClick={() => setModal(true)}>Masuk</LoginButton>
+        )}
       </Container>
 
       {modal && (

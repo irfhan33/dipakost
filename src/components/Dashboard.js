@@ -16,8 +16,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import { useSelector } from "react-redux";
+import { selectUserName } from "../features/user/userSlice";
 function Dashboard() {
   const [kosts, setKosts] = useState([]);
+  const user = useSelector(selectUserName);
 
   useEffect(() => {
     onSnapshot(
@@ -55,7 +58,7 @@ function Dashboard() {
       <Sidebar />
       <Content>
         <ContentHeader>
-          <h1>Data Kost Muli</h1>
+          <h1>Data Kost {user}</h1>
           <Link to="/tambah-data">
             <ButtonTambahData>
               <AddIcon />

@@ -34,7 +34,8 @@ function RegisterOwner() {
       email: fields.email,
       profile: fields.profile,
     }).then(() => {
-      navigate("/dashboard");
+      alert("Pendaftaran Berhasil. Silahkan Login");
+      navigate("/");
     });
   }
   return (

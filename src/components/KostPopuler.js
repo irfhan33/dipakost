@@ -51,7 +51,7 @@ function KostPopuler() {
       <Title>Area Kost Populer</Title>
       <Wrapper>
         {areas.map((area) => (
-          <Link to={`/area-populer/${area.area.toLowerCase()}`}>
+          <Link to={`/area-populer/${area.area.toLowerCase()}`} key={area.id}>
             <Item key={area.id}>
               <img src={area.img} alt="" />
               <span>{area.area}</span>

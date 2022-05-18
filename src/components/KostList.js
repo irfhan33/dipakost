@@ -8,7 +8,6 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { Link } from "react-router-dom";
 function KostList({ title, kosts, type }) {
-  console.log(kosts);
   const carouselRef = useRef(null);
 
   const settings = {
@@ -31,7 +30,7 @@ function KostList({ title, kosts, type }) {
       <KostListHeader title={title} prev={prev} next={next} type={type} />
       <Carousel ref={carouselRef} {...settings}>
         {kosts.map((kost) => (
-          <Link to={`/detail/${kost.id}`}>
+          <Link to={`/detail/${kost.id}`} key={kost.id}>
             <KostItem
               key={kost.id}
               image={kost.gambar1}

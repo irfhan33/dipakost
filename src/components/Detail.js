@@ -10,11 +10,17 @@ import WindowOutlinedIcon from "@mui/icons-material/WindowOutlined";
 import HomeMaxOutlinedIcon from "@mui/icons-material/HomeMaxOutlined";
 import { SRLWrapper } from "simple-react-lightbox";
 import Navbar, { ModalClose } from "./Navbar";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import Modal from "./Modal";
+import { useSelector } from "react-redux";
+import { selectUserEmail, selectUserName } from "../features/user/userSlice";
+import { db } from "./../firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 function Detail() {
+  const navigate = useNavigate();
+
   const options = {
     buttons: {
       backgroundColor: "rgba(30,30,36,0)",
@@ -48,6 +54,21 @@ function Detail() {
     }
   }, [modal]);
 
+  const buatPesanan = () => {
+    addDoc(collection(db, "pesanan"), {
+      nama_kost: data.nama_kost,
+      alamat: data.alamat,
+      type: data.type,
+      harga: data.harga,
+    }).then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "Pesanan Berhasil Dibuat",
+        showConfirmButton: false,
+      });
+      navigate("/dashboard");
+    });
+  };
   return (
     <>
       <Navbar />
@@ -137,7 +158,9 @@ function Detail() {
           <Modal>
             <h1>Informasi Pesanan</h1>
             <InformasiPesanan data={data} />
-            <ButtonModal>Buat Pesanan</ButtonModal>
+            <a href="https://wa.me/+6281248636243">
+              <ButtonModal>Buat Pesanan</ButtonModal>
+            </a>
           </Modal>
         </>
       )}
