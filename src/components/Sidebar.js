@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
@@ -9,18 +9,18 @@ import { useSelector } from "react-redux";
 import { selectUserName } from "../features/user/userSlice";
 function Sidebar() {
   const user = useSelector(selectUserName);
-
-  console.log(user);
-
+  const [expand, setExpand] = useState(true);
   return (
     <SidebarContainer>
       {/* Profile */}
       <Profile>
         <Avatar></Avatar>
-        <InfoProfile>
-          <span>{user}</span>
-          <p>Pemilik Kost</p>
-        </InfoProfile>
+        {expand && (
+          <InfoProfile>
+            <span>{user}</span>
+            <p>Pemilik Kost</p>
+          </InfoProfile>
+        )}
       </Profile>
 
       {/* Nav List */}
@@ -30,12 +30,33 @@ function Sidebar() {
             Icon={MapsHomeWorkRoundedIcon}
             title="Kelola Data Kost"
             active
+            expand={expand}
           />
         </Link>
         <Link to="/">
-          <NavItem Icon={MeetingRoomRoundedIcon} title="Logout" />
+          <NavItem
+            Icon={MeetingRoomRoundedIcon}
+            title="Logout"
+            expand={expand}
+          />
         </Link>
       </ul>
+
+      <ToggleExpand onClick={() => setExpand(!expand)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="rgb(0, 171, 85)"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </ToggleExpand>
     </SidebarContainer>
   );
 }
@@ -45,8 +66,6 @@ export default Sidebar;
 const SidebarContainer = styled.div`
   padding: 20px 20px;
   border-right: 1px dashed rgba(145, 158, 171, 0.24);
-  min-width: 240px;
-  max-width: 240px;
   min-height: 100vh;
   ul {
     padding: 0;
@@ -79,5 +98,25 @@ const InfoProfile = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     color: rgb(99, 115, 129);
+  }
+`;
+
+const ToggleExpand = styled.div`
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 171, 85, 0.08);
+  margin-inline: auto;
+  margin-top: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 171, 85, 0.2);
+  }
+  svg {
+    width: 28px;
   }
 `;

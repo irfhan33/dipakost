@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { db } from "../firebaseConfig";
 import KostItem from "./KostItem";
 import Navbar from "./Navbar";
-const AreaPopuler = () => {
+const Search = () => {
   const { area } = useParams();
   const [kosts, setKosts] = useState([]);
 
@@ -49,7 +49,7 @@ const AreaPopuler = () => {
   );
 };
 
-export default AreaPopuler;
+export default Search;
 
 const ViewallHeader = ({ area }) => {
   return (

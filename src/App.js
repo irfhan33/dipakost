@@ -10,6 +10,10 @@ import TambahData from "./components/TambahData";
 import EditData from "./components/EditData";
 import ViewAll from "./components/ViewAll";
 import AreaPopuler from "./components/AreaPopuler";
+import AreaPopulerAll from "./components/AreaPopulerAll";
+import Tentang from "./components/Tentang";
+import Syarat from "./components/Syarat";
+import Search from "./components/Search";
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +28,10 @@ function App() {
         <Route path="/edit-data/:id" element={<EditData />} />
         <Route path="/view-all/:type" element={<ViewAll />} />
         <Route path="/area-populer/:area" element={<AreaPopuler />} />
+        <Route path="/area-populer-all" element={<AreaPopulerAll />} />
+        <Route path="/tentang" element={<Tentang />} />
+        <Route path="/syarat-dan-ketentuan" element={<Syarat />} />
+        <Route path="/search/:area" element={<Search />} />
       </Routes>
     </BrowserRouter>
   );

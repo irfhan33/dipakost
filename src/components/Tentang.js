@@ -5,7 +5,9 @@ import styled from "styled-components";
 import { db } from "../firebaseConfig";
 import KostItem from "./KostItem";
 import Navbar from "./Navbar";
-const AreaPopuler = () => {
+import KostPopuler from "./KostPopuler";
+import Footer from "./Footer";
+const Tentang = () => {
   const { area } = useParams();
   const [kosts, setKosts] = useState([]);
 
@@ -23,41 +25,21 @@ const AreaPopuler = () => {
     );
   }, []);
 
-  const kost = kosts.filter((kost) => {
-    return kost.area == area;
-  });
-
   return (
     <>
       <Navbar />
       <Container>
-        <ViewallHeader area={area} />
-        <ListContainer>
-          {kost.map((kost) => (
-            <KostItem
-              key={kost.id}
-              image={kost.gambar1}
-              detailAdress={kost.nama_kost}
-              highlightAdress={kost.area}
-              price={kost.harga}
-            />
-          ))}
-        </ListContainer>
-        {!kost.length && <h1>Data {area} tidak ditemukan</h1>}
+        <Header>
+          <h1>Tentang</h1>
+        </Header>
+        <Footer />
       </Container>
     </>
   );
 };
 
-export default AreaPopuler;
+export default Tentang;
 
-const ViewallHeader = ({ area }) => {
-  return (
-    <Header>
-      <h1>Hasil Pencarian {area}</h1>
-    </Header>
-  );
-};
 const Container = styled.div`
   display: flex;
   flex-direction: column;

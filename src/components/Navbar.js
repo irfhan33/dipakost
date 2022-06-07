@@ -15,10 +15,10 @@ function Navbar() {
   const [modalstatus, setModalstatus] = useState("default");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUserName);
+  const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
     if (modal) {
@@ -31,18 +31,10 @@ function Navbar() {
   async function loginOwner(e) {
     e.preventDefault();
 
-    // Check Username
     getDocs(
       query(collection(db, "pemilik_kost"), where("username", "==", username))
     )
       .then((snapshot) => {
-        // setData(
-        //   snapshot.docs.map((doc) => ({
-        //     id: doc.id,
-        //     ...doc.data(),
-        //   }))
-        // );
-
         if (!snapshot.size) {
           return alert("Username Tidak Terdaftar");
         }
@@ -51,7 +43,6 @@ function Navbar() {
           if (password !== doc.data().password) {
             alert("Password Salah");
           } else {
-            setModal(false);
             alert("Login Berhasil");
             dispatch(
               setUserLogin({
@@ -59,6 +50,7 @@ function Navbar() {
                 email: doc.data().email,
               })
             );
+            setModal(false);
             navigate("/dashboard");
           }
         });
@@ -73,12 +65,6 @@ function Navbar() {
     // Check Username
     getDocs(query(collection(db, "user"), where("username", "==", username)))
       .then((snapshot) => {
-        // setData(
-        //   snapshot.docs.map((doc) => ({
-        //     id: doc.id,
-        //     ...doc.data(),
-        //   }))
-        // );
         if (!snapshot.size) {
           return alert("Username Tidak Terdaftar");
         }
@@ -103,6 +89,11 @@ function Navbar() {
       });
   }
 
+  const searchHandler = (e) => {
+    e.preventDefault();
+    navigate("/search/" + searchField);
+  };
+
   return (
     <>
       <Container>
@@ -110,13 +101,27 @@ function Navbar() {
           <Logo>mulikost</Logo>
         </Link>
         <NavMenu>
-          <NavMenuItem>Sewakan Propertimu</NavMenuItem>
-          <NavMenuItem>Area Populer</NavMenuItem>
-          <NavMenuItem>Tentang mulikost</NavMenuItem>
-          <NavMenuItem>Syarat dan Ketentuan</NavMenuItem>
+          <Link to="/registerowner">
+            <NavMenuItem>Sewakan Propertimu</NavMenuItem>
+          </Link>
+          <Link to="/area-populer-all">
+            <NavMenuItem>Area Populer</NavMenuItem>
+          </Link>
+          <Link to="/tentang">
+            <NavMenuItem>Tentang mulikost</NavMenuItem>
+          </Link>
+          <Link to="/syarat-dan-ketentuan">
+            <NavMenuItem>Syarat dan Ketentuan</NavMenuItem>
+          </Link>
         </NavMenu>
         <Search>
-          <span>Cari kost di daerah mana?</span>
+          <form action="" onSubmit={searchHandler}>
+            <input
+              type="text"
+              placeholder="Cari Kost Daerah Mana?"
+              onChange={(e) => setSearchField(e.target.value)}
+            />
+          </form>
           <SearchIcon className="icon_search" />
         </Search>
         {user ? (
@@ -290,6 +295,12 @@ const Search = styled.div`
 
   @media (max-width: 768px) {
     padding: 0 4px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    font-weight: medium;
   }
 
   span {

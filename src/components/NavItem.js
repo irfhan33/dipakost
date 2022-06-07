@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-function NavItem({ Icon, title, active }) {
+function NavItem({ Icon, title, active, expand }) {
   return (
-    <Container active={active}>
+    <Container active={active} expand={expand}>
       <li>
         <Icon className="navmenu-icon" />
-        <span>{title}</span>
+
+        {expand && <span>{title}</span>}
       </li>
     </Container>
   );
@@ -26,6 +27,7 @@ const Container = styled.div`
     gap: 10px;
     margin-bottom: 4px;
     cursor: pointer;
+    white-space: nowrap;
     background: ${({ active }) =>
       active ? "rgba(0, 171, 85, 0.08)" : "transparent"};
 

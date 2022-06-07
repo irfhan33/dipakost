@@ -72,14 +72,9 @@ function Dashboard() {
             <thead>
               <tr>
                 <th>Nama Kost</th>
-                <th>Lokasi Google Map</th>
                 <th>Harga</th>
                 <th>Alamat</th>
                 <th>Type</th>
-                <th>Keterangan</th>
-                <th>Gambar 1</th>
-                <th>Gambar 2</th>
-                <th>Gambar 3</th>
                 <th>Kategori</th>
                 <th>Area</th>
                 <th>Actions</th>
@@ -93,9 +88,6 @@ function Dashboard() {
                     <p>{kost.nama_kost}</p>
                   </td>
                   <td>
-                    <p>{kost.lokasi_gmaps}</p>
-                  </td>
-                  <td>
                     <p>{kost.harga}</p>
                   </td>
                   <td>
@@ -104,18 +96,7 @@ function Dashboard() {
                   <td>
                     <p>{kost.type}</p>
                   </td>
-                  <td>
-                    <p>{kost.keterangan}</p>
-                  </td>
-                  <td>
-                    <p>{kost.gambar1}</p>
-                  </td>
-                  <td>
-                    <p>{kost.gambar2}</p>
-                  </td>
-                  <td>
-                    <p>{kost.gambar3}</p>
-                  </td>
+
                   <td>
                     <p>{kost.kategori}</p>
                   </td>
@@ -187,7 +168,7 @@ const Content = styled.div`
       white-space: nowrap;
       text-overflow: ellipsis;
       -webkit-line-clamp: 1; /* number of lines to show */
-      line-clamp: 2;
+      line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -201,8 +182,8 @@ const Content = styled.div`
       p {
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 2; /* number of lines to show */
-        line-clamp: 2;
+        -webkit-line-clamp: 1; /* number of lines to show */
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }
