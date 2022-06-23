@@ -21,6 +21,6 @@ const Container = styled.div`
     border-radius: 4px;
     overflow: hidden;
     height: 100%;
-    object-fit: contain;
+    max-height: 350px;
   }
 `;

@@ -32,7 +32,7 @@ function KostPopuler() {
     },
     {
       id: 6,
-      img: "https://id2-cdn.pgimgs.com/listing/18211638/UPHO.102766959.V550/Gemilang-Harvest-Makassar-Indonesia.jpg",
+      img: "https://sikumbang.ppdpp.id/public/upload/1632982021375-56c847c0-5928-4487-9180-ce6206bb32cb.jpg",
       area: "Tamalanrea",
     },
     {
@@ -42,8 +42,8 @@ function KostPopuler() {
     },
     {
       id: 8,
-      img: "https://img.inews.co.id/media/600/files/inews_new/2021/09/20/10_tempat_Wisata_di_Makassar.JPG",
-      area: "Makassar",
+      img: "https://sulselekspres.com/wp-content/uploads/2018/12/64e89baf-bfb7-467f-92c4-6ef3c4957ada_169.jpg",
+      area: "Sudiang",
     },
   ];
   return (

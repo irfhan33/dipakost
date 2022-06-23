@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-function NavItem({ Icon, title, active, expand }) {
+function NavItem({ Icon, title, active, expand, onClick }) {
   return (
-    <Container active={active} expand={expand}>
+    <Container active={active} expand={expand} onClick={onClick}>
       <li>
         <Icon className="navmenu-icon" />
 

@@ -4,15 +4,14 @@ import Slider from "react-slick";
 import CarouselItem from "./CarouselItem";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
-function ImgCarousel() {
+function MuliCarousel() {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     centerMode: true,
-    autoplay: true,
+    autoplay: false,
     responsive: [
       {
         breakpoint: 768,
@@ -41,24 +40,22 @@ function ImgCarousel() {
   return (
     <Container>
       <Carousel {...settings}>
-        <Link to="/detail/XfVDyujS0KFUbBjTZgro">
-          <CarouselItem image="/muli1.jpg" />
-        </Link>
-        <Link to="/detail/OX3LBUWIBJDyJmrtlONQ">
-          <CarouselItem image="/muli2.jpg" />
-        </Link>
-        <Link to="/detail/0U8dhBBylsaSWlAoAxsX">
-          <CarouselItem image="/muli3.jpg" />
-        </Link>
-        <Link to="/detail/kgXrghPfwqhpGd3i5Wxo">
-          <CarouselItem image="/muli4.jpg" />
-        </Link>
+        <CarouselItem image="/carousel/1.jpg" />
+        <CarouselItem image="/carousel/2.jpg" />
+        <CarouselItem image="/carousel/3.jpg" />
+        <CarouselItem image="/carousel/4.jpg" />
+        <CarouselItem image="/carousel/5.jpg" />
+        <CarouselItem image="/carousel/6.jpg" />
+        <CarouselItem image="/carousel/7.jpg" />
+        <CarouselItem image="/carousel/8.jpg" />
+        <CarouselItem image="/carousel/9.jpg" />
+        <CarouselItem image="/carousel/10.jpg" />
       </Carousel>
     </Container>
   );
 }
 
-export default ImgCarousel;
+export default MuliCarousel;
 
 const Container = styled.div`
   padding: 2vh 3vw;

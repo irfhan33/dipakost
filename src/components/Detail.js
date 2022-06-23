@@ -13,14 +13,20 @@ import Navbar, { ModalClose } from "./Navbar";
 import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import Modal from "./Modal";
-import { useSelector } from "react-redux";
-import { selectUserEmail, selectUserName } from "../features/user/userSlice";
+
 import { db } from "./../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import { selectUserName } from "../features/user/userSlice";
 function Detail() {
   const navigate = useNavigate();
+  const user = useSelector(selectUserName);
 
+  const toLogin = () => {
+    alert("Silahkan Login Terlebih Dahulu");
+    navigate("/");
+  };
   const options = {
     buttons: {
       backgroundColor: "rgba(30,30,36,0)",
@@ -60,13 +66,16 @@ function Detail() {
       alamat: data.alamat,
       type: data.type,
       harga: data.harga,
+      user: user,
+      statusbayar: 1,
+      bukti: null,
     }).then(() => {
       Swal.fire({
         icon: "success",
         title: "Pesanan Berhasil Dibuat",
         showConfirmButton: false,
       });
-      navigate("/dashboard");
+      navigate("/pesanan");
     });
   };
   return (
@@ -158,9 +167,10 @@ function Detail() {
           <Modal>
             <h1>Informasi Pesanan</h1>
             <InformasiPesanan data={data} />
-            <a href="https://wa.me/+6281248636243">
-              <ButtonModal>Buat Pesanan</ButtonModal>
-            </a>
+
+            <ButtonModal onClick={user ? buatPesanan : toLogin}>
+              Buat Pesanan
+            </ButtonModal>
           </Modal>
         </>
       )}

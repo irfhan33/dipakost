@@ -4,12 +4,23 @@ import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Avatar } from "@mui/material";
 import NavItem from "./NavItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUserName } from "../features/user/userSlice";
+import { selectUserName, setUserLogout } from "../features/user/userSlice";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import { useDispatch } from "react-redux";
+
 function Sidebar() {
   const user = useSelector(selectUserName);
   const [expand, setExpand] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const Logout = () => {
+    dispatch(setUserLogout());
+    navigate("/");
+  };
   return (
     <SidebarContainer>
       {/* Profile */}
@@ -28,18 +39,27 @@ function Sidebar() {
         <Link to="/dashboard">
           <NavItem
             Icon={MapsHomeWorkRoundedIcon}
-            title="Kelola Data Kost"
+            title="Dashboard"
             active
             expand={expand}
           />
         </Link>
-        <Link to="/">
+        <Link to="/pesanan-owner">
           <NavItem
-            Icon={MeetingRoomRoundedIcon}
-            title="Logout"
+            Icon={BookmarkBorderIcon}
+            title="Data pesanan"
             expand={expand}
           />
         </Link>
+        <Link to={`/profile-owner/` + user}>
+          <NavItem Icon={AccountCircleIcon} title="Profile" expand={expand} />
+        </Link>
+        <NavItem
+          Icon={MeetingRoomRoundedIcon}
+          title="Logout"
+          expand={expand}
+          onClick={Logout}
+        />
       </ul>
 
       <ToggleExpand onClick={() => setExpand(!expand)}>

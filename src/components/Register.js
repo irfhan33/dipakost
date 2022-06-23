@@ -30,6 +30,7 @@ function Register() {
     e.preventDefault();
 
     addDoc(collection(db, "user"), {
+      nama: fields.nama,
       username: fields.username,
       password: fields.password,
       nomor_hp: fields.nomor_hp,

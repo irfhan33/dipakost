@@ -7,6 +7,8 @@ import ImgCarousel from "./ImgCarousel";
 import KostList from "./KostList";
 import KostPopuler from "./KostPopuler";
 import Navbar from "./Navbar";
+import MuliCarousel from "./MuliCarousel";
+import Footer2 from "./Footer2";
 function Home() {
   const [kosts, setKosts] = useState([]);
 
@@ -37,6 +39,7 @@ function Home() {
       <Navbar />
       <Container>
         <ImgCarousel />
+        <MuliCarousel />
         <KostList
           title="Kost Rekomendasi"
           kosts={rekomendasi}
@@ -44,7 +47,7 @@ function Home() {
         />
         <KostList title="Harga Eksklusif" kosts={eksklusif} type="eksklusif" />
         <KostPopuler />
-        <Footer />
+        <Footer2 />
       </Container>
     </>
   );
