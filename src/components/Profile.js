@@ -17,7 +17,11 @@ import { db } from "./../firebaseConfig";
 import { storage } from "./../firebaseConfig";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUserName, setUserLogout } from "../features/user/userSlice";
+import {
+  selectUserName,
+  selectUserRole,
+  setUserLogout,
+} from "../features/user/userSlice";
 import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Avatar } from "@mui/material";
@@ -39,6 +43,8 @@ function Profile2() {
     email: "",
     profile: "",
   });
+  const role = useSelector(selectUserRole);
+
   useEffect(() => {
     getDocs(query(collection(db, "user"), where("username", "==", username)))
       .then((snapshot) => {
@@ -106,7 +112,7 @@ function Profile2() {
             {expand && (
               <InfoProfile>
                 <span>{user}</span>
-                <p>Pemilik Kost</p>
+                <p>{role}</p>
               </InfoProfile>
             )}
           </Profile>

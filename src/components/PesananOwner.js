@@ -20,7 +20,11 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
-import { selectUserName, setUserLogout } from "../features/user/userSlice";
+import {
+  selectUserName,
+  selectUserRole,
+  setUserLogout,
+} from "../features/user/userSlice";
 import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Avatar } from "@mui/material";
@@ -35,6 +39,7 @@ function PesananOwner() {
   const [pesanan, setPesanan] = useState([]);
   const [modal, setModal] = useState(false);
   const user = useSelector(selectUserName);
+  const role = useSelector(selectUserRole);
   const [idBayar, setIdbayar] = useState("");
   const [buktiTransfer, setbuktiTransfer] = useState("");
   const dispatch = useDispatch();
@@ -99,7 +104,7 @@ function PesananOwner() {
             {expand && (
               <InfoProfile>
                 <span>{user}</span>
-                <p>Pemilik Kost</p>
+                <p>{role}</p>
               </InfoProfile>
             )}
           </Profile>

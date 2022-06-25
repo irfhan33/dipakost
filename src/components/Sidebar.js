@@ -6,13 +6,18 @@ import { Avatar } from "@mui/material";
 import NavItem from "./NavItem";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUserName, setUserLogout } from "../features/user/userSlice";
+import {
+  selectUserName,
+  selectUserRole,
+  setUserLogout,
+} from "../features/user/userSlice";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import { useDispatch } from "react-redux";
 
 function Sidebar() {
   const user = useSelector(selectUserName);
+  const role = useSelector(selectUserRole);
   const [expand, setExpand] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,7 +34,7 @@ function Sidebar() {
         {expand && (
           <InfoProfile>
             <span>{user}</span>
-            <p>Pemilik Kost</p>
+            <p>{role}</p>
           </InfoProfile>
         )}
       </Profile>

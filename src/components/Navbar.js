@@ -9,11 +9,7 @@ import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectUserId,
-  selectUserName,
-  setUserLogin,
-} from "../features/user/userSlice";
+import { selectUserName, setUserLogin } from "../features/user/userSlice";
 function Navbar() {
   const [modal, setModal] = useState(false);
   const [modalstatus, setModalstatus] = useState("default");
@@ -22,7 +18,6 @@ function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUserName);
-  const id = useSelector(selectUserId);
   const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
@@ -53,7 +48,7 @@ function Navbar() {
               setUserLogin({
                 name: doc.data().username,
                 email: doc.data().email,
-                id: doc.data().id,
+                role: "Pemilik kost",
               })
             );
             setModal(false);
@@ -83,7 +78,7 @@ function Navbar() {
               setUserLogin({
                 name: doc.data().username,
                 email: doc.data().email,
-                id: doc.data().id,
+                role: "Pencari Kost",
               })
             );
             setModal(false);

@@ -20,7 +20,11 @@ import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
-import { selectUserName, setUserLogout } from "../features/user/userSlice";
+import {
+  selectUserName,
+  selectUserRole,
+  setUserLogout,
+} from "../features/user/userSlice";
 import MapsHomeWorkRoundedIcon from "@mui/icons-material/MapsHomeWorkRounded";
 import MeetingRoomRoundedIcon from "@mui/icons-material/MeetingRoomRounded";
 import { Avatar } from "@mui/material";
@@ -39,6 +43,7 @@ function PesananSaya() {
   const [imageUrl, setImageUrl] = useState("");
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const role = useSelector(selectUserRole);
 
   useEffect(() => {
     onSnapshot(
@@ -102,7 +107,7 @@ function PesananSaya() {
             {expand && (
               <InfoProfile>
                 <span>{user}</span>
-                <p>Pemilik Kost</p>
+                <p>{role}</p>
               </InfoProfile>
             )}
           </Profile>
